@@ -1,0 +1,39 @@
+// User function Template for Java
+
+class Solution {
+    // You must implement this function
+    static void sieve() {
+        int N=12246;
+        List<Integer>ans=findPrimeFactors(N);
+    }
+
+    static List<Integer> findPrimeFactors(int N) {
+        int []prime=new int[N+1];
+        for(int i=2;i<=N;i++)
+        {
+            prime[i]=i;
+        }
+        for(int i=2;i*i<=N;i++)
+        {
+            if(prime[i]==i)
+            {
+                for(int j=i*i;j<=N;j+=i)
+                {
+                    if(prime[j]==j)
+                    {
+                        prime[j]=i;
+                    }
+                }
+            }
+        }
+        List<Integer>ans=new ArrayList<>();
+        while(N!=1)
+        {
+            ans.add(prime[N]);
+            N=N/prime[N];
+            
+        }
+        return ans;
+        
+    }
+}
