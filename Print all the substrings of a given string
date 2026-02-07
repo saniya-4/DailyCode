@@ -1,0 +1,32 @@
+import java.util.* ;
+import java.io.*; 
+import java.util.Scanner;
+class Solution {
+	static void ways(int index,int n,String s,StringBuilder res)
+    {
+        if(index==n)
+        {
+            return;
+        }
+        res.append(s.charAt(index));
+        System.out.println(res.toString());
+        ways(index+1,n,s,res);
+        res.deleteCharAt(res.length()-1);
+        if(res.length()==0)
+        {
+            ways(index+1,n,s,res);
+        }
+    }
+    static void printSubstrings(String input) {
+        int n=input.length();
+        StringBuilder res=new StringBuilder();
+        ways(0,n,input,res);
+    }
+    
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+        String input = sc.nextLine();
+        printSubstrings(input);
+	}
+}
+ 
