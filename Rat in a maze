@@ -1,0 +1,34 @@
+class Solution {
+    public void ways(int i,int j,int n,ArrayList<String>ans,StringBuilder s,int [][]maze,int [][]vis)
+    {
+        vis[i][j]=1;
+        if(i==n-1 && j==n-1)
+        {
+            ans.add(s.toString());
+            return;
+        }
+        int []dr=new int[]{1,0,0,-1};
+        int []dc=new int[]{0,-1,1,0};
+        char []ch=new char[]{'D','L','R','U'};
+        for(int k=0;k<4;k++)
+        {
+            int nrow=i+dr[k];
+            int ncol=j+dc[k];
+            if(nrow>=0 && nrow<n && ncol>=0 && ncol<n && maze[nrow][ncol]==1 && vis[nrow][ncol]==0)
+            {
+                s.append(ch[k]);
+                ways(nrow,ncol,n,ans,s,maze,vis);
+                s.deleteCharAt(s.length()-1);
+                vis[nrow][ncol]=0;
+            }
+        }
+    }
+    public ArrayList<String> ratInMaze(int[][] maze) {
+     int n=maze.length;
+     int [][]vis=new int[n][n];
+     ArrayList<String>ans=new ArrayList<>();
+     StringBuilder s=new StringBuilder();
+     ways(0,0,n,ans,s,maze,vis);
+     return ans;
+    }
+}
