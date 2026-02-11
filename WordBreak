@@ -1,0 +1,31 @@
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        Set<String>set=new HashSet<>(wordDict);
+        int n=s.length();
+        boolean []seen=new boolean[n+1];
+        Queue<Integer>q=new LinkedList<>();
+        q.add(0);
+        while(!q.isEmpty())
+        {
+            int start=q.remove();
+            if(start==n)
+            {
+                return true;
+            }
+            for(int end=start+1;end<=n;end++)
+            {
+                if(seen[end]==true)
+                {
+                    continue;
+                }
+                
+                if(set.contains(s.substring(start,end)))
+                {
+                    q.add(end);
+                    seen[end]=true;
+                }
+            }
+        }
+        return false;
+    }
+} 
