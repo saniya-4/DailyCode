@@ -1,0 +1,38 @@
+class Solution {
+    public int find(int val)
+    {
+        int count=0;
+        while(val!=0)
+        {
+            count+=val&1;
+            val=val>>1;
+        }
+        return count;
+    }
+    public boolean isPrime(int val)
+    {
+        if(val<=1)
+        {
+            return false;
+        }
+        for(int i=2;i*i<=val;i++)
+        {
+            if(val%i==0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public int countPrimeSetBits(int left, int right) {
+        int count=0;
+        for(int i=left;i<=right;i++){
+            int val=find(i);
+            if(isPrime(val))
+            {
+                count++;
+            }
+        }
+        return count;
+    }
+}
