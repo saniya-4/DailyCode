@@ -1,0 +1,22 @@
+class Solution {
+    public int binaryGap(int n) {
+        int prev=0;
+        int pos=0;
+        int max=0;
+        boolean seenOne=false;
+        while(n!=0)
+        {
+            if((n&1)==1)
+            {
+                if(seenOne){
+                    max=Math.max(max,pos-prev);
+                }
+                prev=pos;
+                seenOne=true;
+            }
+            n=n>>1;
+            pos++;
+        }
+        return max;
+    }
+}
