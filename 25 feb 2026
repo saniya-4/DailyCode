@@ -1,0 +1,47 @@
+class Pair{
+    int no;
+    int val;
+    Pair(int no,int val)
+    {
+        this.no=no;
+        this.val=val;
+    }
+}
+class Solution {
+    public int find(int no)
+    {
+        int count=0;
+        while(no!=0)
+        {
+            if((no&1)==1)
+            {
+                count++;
+            }
+            no=no>>1;
+        }
+        return count;
+    }
+    public int[] sortByBits(int[] arr) {
+        int cnt=0;
+        
+        PriorityQueue<Pair>pq=new PriorityQueue<>((a,b)->
+        {
+            if(a.val==b.val)
+            {
+                return a.no-b.no;
+            }
+            return a.val-b.val;
+        });
+        for(int x:arr)
+        {
+            pq.add(new Pair(x,find(x)));
+        }
+        int i=0;
+        while(!pq.isEmpty())
+        {
+            arr[i++]=pq.poll().no;
+        }
+       
+       return arr;
+    }
+}
