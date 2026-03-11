@@ -1,0 +1,40 @@
+class Solution {
+    public static String minWindow(String s, String p) {
+      
+      int count=0;
+      int left=0;
+      int []hash=new int[256];
+      int si=-1;
+      int minlen=Integer.MAX_VALUE;
+      for(char c:p.toCharArray())
+      {
+          hash[c]+=1;
+      }
+      for(int right=0;right<s.length();right++)
+      {
+          char c=s.charAt(right);
+          if(hash[c]>0)
+          {
+              count++;
+          }
+          hash[c]-=1;
+          while(count==p.length())
+          {
+              if((right-left+1)<minlen)
+              {
+                  minlen=right-left+1;
+                  si=left;
+              }
+              char cl=s.charAt(left);
+              hash[cl]+=1;
+              if(hash[cl]>0)
+              {
+                  count--;
+              }
+              left++;
+          }
+      }
+      return si==-1?"":s.substring(si,si+minlen);
+      
+    }
+}
